@@ -16,7 +16,7 @@ const Banner = () => {
             Book an appointment with trusted doctors.
           </h2>
           <p className="mt-4 max-w-md text-sm leading-6 text-blue-100 sm:text-base">
-            Get the care you need from experienced specialists, whenever you
+            Get the care you need from experienced specialists , whenever you
             need it.
           </p>
         </div>
