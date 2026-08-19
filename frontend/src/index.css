@@ -3,10 +3,15 @@
 
 :root {
     --color-primary: #5f6fff;
+    
 }
 
 .bg-primary {
     background-color: var(--color-primary);
+}
+
+.grid-cols-auto {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
 
 .active hr {
@@ -15,4 +20,7 @@
 
 ::-webkit-scrollbar {
     display: none;
+}
+html{
+    scroll-behavior: smooth;
 }
