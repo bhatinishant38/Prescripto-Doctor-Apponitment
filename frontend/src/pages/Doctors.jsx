@@ -62,27 +62,3 @@ const Doctors = () => {
 
 export default Doctors;
 
-//  some alternate logic for filterDoctors
-
-  // const filterDoctors=(docSpeciality)=>{
-  //   if(docSpeciality){
-  //    const doc = doctors.filter((doctor)=> doctor.speciality === docSpeciality)
-  //    if(doc.length>0){
-  //        setFilterDoctor(doc)
-  //    }else{
-  //     setFilterDoctor(doctors)
-  //        navigate('/doctors')
-  //    }
-      
-
-  //   }else{
-  //     setFilterDoctor(doctors)
-     
-  //   }
-  // }
-   {/* <p onClick={()=>filterDoctors("General physician")} className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer`}>General physician</p>
-          <p onClick={()=>filterDoctors("Gynecologist")} className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer`}>Gynecologist</p>
-          <p onClick={()=>filterDoctors("Dermatologist")} className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer`}>Dermatologist</p>
-          <p onClick={()=>filterDoctors("Pediatricians")} className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer`}>Pediatricians</p>
-          <p onClick={()=>filterDoctors("Neurologist")} className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer`}>Neurologist</p>
-          <p onClick={()=>filterDoctors("Gastroenterologist")} className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer`}>Gastroenterologist</p> */}
