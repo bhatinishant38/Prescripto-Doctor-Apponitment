@@ -4,82 +4,42 @@ import { NavLink } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="mt-20 border-t border-slate-200 pt-12 text-slate-600">
-      <div className="grid gap-10 pb-12 md:grid-cols-[2fr_1fr_1fr] md:gap-16">
-        <div className="max-w-md">
-          <NavLink to="/" aria-label="Prescripto home">
-            <img className="w-40" src={assets.logo} alt="Prescripto" />
-          </NavLink>
-          <p className="mt-5 text-sm leading-7 text-slate-500">
-            Prescripto makes it simple to find trusted doctors and book the care
-            you need, whenever you need it.
-          </p>
-        </div>
-        <div>
-          <h2 className="text-sm font-bold uppercase tracking-widest text-slate-900">
-            Company
-          </h2>
-          <ul className="mt-5 space-y-3 text-sm">
-            <li>
-              <NavLink className="transition-colors hover:text-blue-600" to="/">
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className="transition-colors hover:text-blue-600"
-                to="/about"
-              >
-                About us
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className="transition-colors hover:text-blue-600"
-                to="/contact"
-              >
-                Contact us
-              </NavLink>
-            </li>
-            <li>
-              <a
-                className="transition-colors hover:text-blue-600"
-                href="#privacy"
-              >
-                Privacy policy
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <h2 className="text-sm font-bold uppercase tracking-widest text-slate-900">
-            Get in touch
-          </h2>
-          <ul className="mt-5 space-y-3 text-sm">
-            <li>
-              <a
-                className="transition-colors hover:text-blue-600"
-                href="tel:+1121347598"
-              >
-                +1-121-347-598
-              </a>
-            </li>
-            <li>
-              <a
-                className="wrap-break-word transition-colors hover:text-blue-600"
-                href="mailto:bhatinishant38@gmail.com"
-              >
-                testexample38@gmail.com
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div className="flex flex-col gap-3 border-t border-slate-200 py-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-        <p>Copyright 2026 Prescripto. All rights reserved.</p>
-        <p className="text-slate-400">Care made simpler.</p>
-      </div>
-    </footer>
+   <div className="md:mx-10">
+   
+         <div className="flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-40 text-sm">
+   
+           <div>
+             <img className="mb-5 w-40" src={assets.logo} alt="" />
+             <p className="w-full md:w-1/2 text-gray-600 leading-6">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae veritatis rerum unde, est alias eos voluptatibus doloribus earum sint quidem. Laborum, mollitia illo aperiam alias esse architecto provident repellendus totam?</p>
+   
+           </div>
+           
+           <div>
+             <p className="text-xl font-medium mb-5">COMPANY</p>
+             <ul className="flex flex-col gap-2 text-gray-600">
+               <li>Home</li>
+               <li>About us</li>
+               <li>Contact us</li>
+               <li>Privacy policy</li>
+             </ul>
+           </div>
+   
+           <div>
+             <p className="text-xl font-medium mb-5">GET IN TOUCH</p>
+             <ul className="flex flex-col gap-2 text-gray-600">
+               <li>+1 123-456-7890</li>
+               <li>testexample382gmail.com</li>
+             </ul>
+   
+           </div>
+         </div>
+   
+         <div>
+           <hr className=""/>
+           <p className="py-5 text-sm text-center">Copyright 2024@ Prescripto - All Right Reserved.</p>
+         </div>
+
+    </div>
   );
 };
 

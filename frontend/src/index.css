@@ -1,9 +1,12 @@
 @import "tailwindcss";
-
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
 :root {
     --color-primary: #5f6fff;
     
+}
+*{
+    font-family: Outfit;
 }
 
 .bg-primary {
