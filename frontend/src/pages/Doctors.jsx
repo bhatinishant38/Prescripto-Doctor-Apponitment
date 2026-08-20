@@ -74,7 +74,7 @@ export default Doctors;
   //        navigate('/doctors')
   //    }
       
-  //      console.log(filterDoctor)
+
   //   }else{
   //     setFilterDoctor(doctors)
      
