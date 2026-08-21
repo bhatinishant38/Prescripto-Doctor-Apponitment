@@ -5,10 +5,11 @@ import { assets } from "../assets/assets";
 
 const Apponitment = () => {
   const { docId } = useParams();
-  console.log(docId);
   const { doctors ,currencySymbol } = useContext(AppContext);
-  const [docInfo, setDocInfo] = useState(null);
+  const daysOfWeek = ['SUN' ,'MON','TUE','WED' ,'THU' ,'FRI' ,'SAT']
 
+
+  const [docInfo, setDocInfo] = useState(null);
   const [docSlots ,setDocSlots] = useState([])
   const [slotIndex ,setSlotIndex] = useState(0)
   const [slotTime , setSlotTime] = useState('')
@@ -80,7 +81,6 @@ const Apponitment = () => {
     getAvailableSlots()
   },[docInfo])
 
-  
 
 
   return (
@@ -117,6 +117,23 @@ const Apponitment = () => {
               Appointment fee: <span className="text-gray-600">{currencySymbol}{docInfo.fees}</span>
               </p>
           </div>
+        </div>
+
+        {/* -----Booking Slots ----- */}
+        <div className="sm:ml-72 sm:pl-4 mt-4 font-medium text-gray-700">
+          <p>Booking slots</p>
+          <div>
+            {
+              docSlots.length && docSlots.map((item,index)=>(
+                <div key={index}>
+                  <p>{item[0] && daysOfWeek[item[0].datetime.getDay()]}</p>
+
+                </div>
+
+              ))
+            }
+          </div>
+
         </div>
       </div>
     )
