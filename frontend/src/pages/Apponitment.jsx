@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import { useParams } from "react-router-dom";
 import { assets } from "../assets/assets";
+import RelatedDoctors from "../components/RelatedDoctors";
 
 const Apponitment = () => {
   const { docId } = useParams();
@@ -122,11 +123,12 @@ const Apponitment = () => {
         {/* -----Booking Slots ----- */}
         <div className="sm:ml-72 sm:pl-4 mt-4 font-medium text-gray-700">
           <p>Booking slots</p>
-          <div>
+          <div className="flex gap-3 items-center w-full overflow-x-scroll mt-4">
             {
               docSlots.length && docSlots.map((item,index)=>(
-                <div key={index}>
+                <div onClick={()=>setSlotIndex(index)} key={index} className={`text-center py-6 min-w-16 rounded-full cursor-pointer ${slotIndex === index ? 'bg-primary text-white': ' border border-gray-200'}`}>
                   <p>{item[0] && daysOfWeek[item[0].datetime.getDay()]}</p>
+                  <p>{item[0] && item[0].datetime.getDate()}</p>
 
                 </div>
 
@@ -134,8 +136,24 @@ const Apponitment = () => {
             }
           </div>
 
+          <div className="flex gap-3 items-center w-full overflow-x-scroll mt-4  ">
+            {docSlots.length && docSlots[slotIndex].map((item,index)=>(
+              <p onClick={()=>setSlotTime(item.time)} key={index} className={`text-sm font-light shrink-0 px-5 py-2 rounded-full cursor-pointer ${slotTime === item.time ? "bg-primary text-white" : "border border-gray-200"}`}>
+                {item.time.toLowerCase()}
+
+              </p>
+            ))}
+          </div>
+
+          <button className="bg-primary text-white font-light text-sm px-14 py-3 rounded-full my-6 ">Book an Appointment</button>
+
         </div>
+
+        {/* -------- Listing Related Doctors   -------- */}
+        <RelatedDoctors docId={docId} speciality={docInfo.speciality}/>
       </div>
+      
+      
     )
   );
 };

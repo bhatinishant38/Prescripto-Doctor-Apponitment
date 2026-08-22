@@ -5,7 +5,7 @@ import { NavLink, useNavigate  } from 'react-router-dom'
 
 const Navbar = () => {
 
-    const navigate =useNavigate()
+    const navigate = useNavigate()
 
     const [showMenu ,setShowMenu ] = useState(false)
     const [token,setToken] = useState(true)

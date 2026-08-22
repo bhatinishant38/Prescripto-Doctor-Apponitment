@@ -3,14 +3,13 @@
 
 :root {
     --color-primary: #5f6fff;
-    
+}
+
+@theme {
+    --color-primary: #5f6fff;
 }
 *{
     font-family: Outfit;
-}
-
-.bg-primary {
-    background-color: var(--color-primary);
 }
 
 .grid-cols-auto {
