@@ -1,9 +1,12 @@
 import React from 'react'
+import Login from './pages/Login.jsx'
 
 
 const App = () => {
   return (
-    <div className='bg-red-600'>App</div>
+    <div >
+      <Login/>
+    </div>
   )
 }
 
