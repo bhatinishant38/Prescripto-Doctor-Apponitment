@@ -2,6 +2,7 @@ import validator from "validator";
 import bcrypt from "bcrypt";
 import { v2 as cloudinary } from "cloudinary";
 import { doctorModel } from "../models/doctorModel.js";
+import jwt from 'jsonwebtoken'
 
 // Api for adding Doctor
 export const addDoctor = async (req, res) => {
@@ -85,3 +86,27 @@ export const addDoctor = async (req, res) => {
     });
   }
 };
+
+
+// Api for admin login
+
+export const adminLogin = (req, res)=>{
+
+  try {
+     const { email ,password} = req.body
+    if(email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD){
+
+      const token = jwt.sign(email+password , process.env.JWT_SECRET_KEY)
+      res.json({success : true , token})
+    } else{
+       res.json({success : false , message: "Invalid Credantials"})
+    }
+    
+  } catch (error) {
+    console.log(error)
+     res.json({success : false , message: error.message})
+    
+  }
+
+}
+
