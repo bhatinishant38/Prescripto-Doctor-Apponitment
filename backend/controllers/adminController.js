@@ -5,9 +5,6 @@ import { doctorModel } from "../models/doctorModel.js";
 
 // Api for adding Doctor
 export const addDoctor = async (req, res) => {
-
-       console.log("========== ADD DOCTOR CALLED ==========");
-   
   try {
     const {
       name,
@@ -35,7 +32,7 @@ export const addDoctor = async (req, res) => {
       !address ||
       !fees
     ) {
-      return res.json({ success: false, message: "Missing details" });
+      return res.json({ success: false, message: "Missing details 3" });
     }
 
     //validating email
@@ -58,14 +55,11 @@ export const addDoctor = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-
     // upload image to cloudinary
     const imageUpload = await cloudinary.uploader.upload(imageFile.path, {
       resource_type: "image",
     });
     const imageUrl = imageUpload.secure_url;
-
-
 
     const doctorData = {
       name,
@@ -85,10 +79,9 @@ export const addDoctor = async (req, res) => {
     await newDoctor.save();
     res.json({ success: true, message: "Doctor Added" });
   } catch (error) {
-
     return res.json({
-        success: false,
-        message: error.message
+      success: false,
+      message: error.message,
     });
   }
 };
