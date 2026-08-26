@@ -30,7 +30,7 @@ const Login = () => {
         
       } catch (error) {
         console.log(error)
-         res.json({success:false , message: "dh"})
+         res.json({success:false , message: error.message})
 
         
       }
