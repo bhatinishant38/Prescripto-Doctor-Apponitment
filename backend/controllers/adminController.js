@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken'
 
 // Api for adding Doctor
 export const addDoctor = async (req, res) => {
+  
   try {
     const {
       name,
@@ -19,6 +20,7 @@ export const addDoctor = async (req, res) => {
       fees,
     } = req.body;
     const imageFile = req.file;
+   
     console.log("file", imageFile);
 
     // checkin if all data to add doctor
@@ -33,7 +35,7 @@ export const addDoctor = async (req, res) => {
       !address ||
       !fees
     ) {
-      return res.json({ success: false, message: "Missing details 3" });
+      return res.json({ success: false, message: "Missing details " });
     }
 
     //validating email

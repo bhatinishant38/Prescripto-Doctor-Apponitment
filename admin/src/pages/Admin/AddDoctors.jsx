@@ -2,30 +2,55 @@ import React, { useContext, useState } from 'react'
 import { assets } from '../../assets/assets'
 import { AdminContext } from '../../context/AdminContext'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const AddDoctors = () => {
 
   const [ docImg ,setDocImg ]  = useState(false)
-  const [name ,setName] = useState('')
-  const [email ,setEmail] = useState('')
-  const [password ,setPassword] = useState('')
-  const [degree ,setDegree] = useState('')
-  const [experience ,setExperience] = useState('1 year')
-  const [about ,setAbout] = useState('')
-  const [fees ,setFees] = useState('')
-  const [speciality ,setSpeciality] = useState('General physician')
-  const [ address1 ,setAddress1]  = useState('')
-  const [ address2 ,setAddress2]  = useState('')
+  const [name,setName] = useState('')
+  const [email,setEmail] = useState('')
+  const [password,setPassword] = useState('')
+  const [degree,setDegree] = useState('')
+  const [experience,setExperience] = useState('1 year')
+  const [about,setAbout] = useState('')
+  const [fees,setFees] = useState('')
+  const [speciality,setSpeciality] = useState('General physician')
+  const [ address1,setAddress1]  = useState('')
+  const [ address2,setAddress2]  = useState('')
 
-  const {backendUrl}  = useContext(AdminContext)
+  const {backendUrl ,aToken}  = useContext(AdminContext)
 
-  const onSubmitHandler =(event)=> {
+  const onSubmitHandler = async (event)=> {
     event.preventDefault()
-    const doctorDetails ={
-      name,email,password ,degree,experience,about, fees,address1,address2
-    }
-    const response = axios.post(backendUrl+"")
-    console.log(doctorDetails)
+    
+    const formData = new FormData()
+    formData.append('image',docImg)
+    formData.append('name',name)
+    formData.append('email',email)
+    formData.append('password',password)
+    formData.append('experience',experience)
+    formData.append('fees',fees)
+    formData.append('about',about)
+    formData.append('speciality',speciality)
+    formData.append('degree' ,degree)
+    formData.append('address' ,JSON.stringify({line1 :address1 ,line2 : address2}))
+
+    
+    formData.forEach((value,key)=>{
+      console.log(`${key} : ${value}`)
+    })
+     console.log(formData)
+    
+    const {data} = await axios.post(backendUrl+"/api/admin/add-doctors",formData,{headers: {aToken}})
+    console.log(data)
+    // if(response.success){
+    //   toast.success(response.message)
+
+    // }
+    // else{
+    //    toast.error(response.message)
+    // }
+    
 
   }
 
@@ -93,7 +118,7 @@ const AddDoctors = () => {
           <option value="Gynecologist">Gynecologist</option>
           <option value="Dermatologist">Dermatologist</option>
           <option value="Pediatricians">Pediatricians</option>
-          <option value="Neurologist">Neurologis</option>
+          <option value="Neurologist">Neurologist</option>
           <option value="Gastroenterologist">Gastroenterologist</option>
         </select>
       </div>
