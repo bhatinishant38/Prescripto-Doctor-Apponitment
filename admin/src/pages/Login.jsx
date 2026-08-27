@@ -23,9 +23,6 @@ const Login = () => {
           }else{
             toast.error(data.message)
           }
-        }else{
-          res.json({success:false , message: "dh"})
-
         }
         
       } catch (error) {
