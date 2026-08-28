@@ -110,3 +110,20 @@ export const adminLogin = (req, res)=>{
 
 }
 
+
+//Api for get all doctors from Database
+
+export const getAllDoctors = async (req,res)=>{
+
+  try {
+    const allDoctors = await doctorModel.find({}).select('-password')
+      res.json({success: true ,allDoctors})
+    
+  } catch (error) {
+    console.log(error)
+     res.json({success : false , message: error.message})
+    
+  }
+
+}
+
