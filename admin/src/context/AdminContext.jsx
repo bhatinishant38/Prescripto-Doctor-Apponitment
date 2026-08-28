@@ -10,8 +10,7 @@ export const AdminContextProvider = ({ children }) => {
   const [allDoctors ,setAllDoctors] = useState([])
 
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
-  console.log(backendUrl);
-
+  
   const getAllDoctors = async ()=>{
 
     try {
@@ -27,9 +26,16 @@ export const AdminContextProvider = ({ children }) => {
     }
   }
 
-  const changeAvailability = ()=>{
-
-    
+  const changeAvailability = async (docId)=> {
+    try {
+      const {data} = await axios.post(backendUrl+"/api/admin/change-availablity" ,{docId} ,{headers :{aToken }})
+      if(data.success){
+        toast.success(data.message)
+        getAllDoctors()
+      }     
+    } catch (error) {
+       toast.error(error.message)  
+    }
   }
 
 
@@ -38,7 +44,8 @@ export const AdminContextProvider = ({ children }) => {
     setAToken,
     backendUrl,
     allDoctors,
-    getAllDoctors
+    getAllDoctors,
+    changeAvailability
   };
 
   return (
