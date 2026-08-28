@@ -17,3 +17,12 @@ export const changeAvailablity = async (req, res)=>{
           res.json({success : false , message: error.message})    
     }
 }
+
+export const fetchAllDoctors = async (req,res)=>{
+     try {
+        const allDoctors = await doctorModel.find({}).select('-password')
+        res.json({success: true , allDoctors})     
+     } catch (error) {
+        res.json({success :false ,message: error.message})
+     }
+}
