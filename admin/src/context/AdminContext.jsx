@@ -17,14 +17,19 @@ export const AdminContextProvider = ({ children }) => {
     try {
         const {data}= await axios.post(backendUrl+'/api/admin/all-doctors',{},{headers:{aToken}})
         if(data.success){
-          setAllDoctors(data.doctors)
-          console.log(data.doctors)
+          setAllDoctors(data.allDoctors)
+          console.log(data.allDoctors)
         }else{
           toast.error(data.message)
         }
     } catch (error) {
       toast.error(error.message)
     }
+  }
+
+  const changeAvailability = ()=>{
+
+    
   }
 
 
