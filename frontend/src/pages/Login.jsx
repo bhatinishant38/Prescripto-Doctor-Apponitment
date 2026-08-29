@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Login = () => {
   const [state, setState] = useState("Sign Up");
@@ -42,7 +43,7 @@ const Login = () => {
           localStorage.setItem("token", data.token);
           setToken(data.token);
           
-          navigate('/')
+          
           toast.success('Login Successfully')
         } else {
           toast.error(data.message);
@@ -53,6 +54,13 @@ const Login = () => {
       toast.error(error.message);
     }
   };
+
+  useEffect(()=>{
+    if(token){
+      navigate('/')
+    }
+
+  },[token])
 
   return (
     <form onSubmit={onSubmitHandler} className="min-h-[80vh] flex items-center">

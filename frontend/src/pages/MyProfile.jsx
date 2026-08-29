@@ -6,7 +6,7 @@ const MyProfile = () => {
   const [userData , setUserData] = useState({
     name : "Edward Vincent",
     image : assets.profile_pic,
-    email : "testExample@gamil.com",
+    email : "testExample@gmail.com",
     phone : "+1 123-456-7890",
     address : {
       line1 : "57th Cress , Richmond",
@@ -32,7 +32,7 @@ const MyProfile = () => {
         <p className='text-neutral-500 underline mt-3'>CONTACT INFORMATION</p>
       <div className='grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-neutral-700'>
       <p className='font-medium'>Email id:</p>
-      <p className='text-blue-500'>{userData.email}</p>
+      <p className='text-blue-500' >{userData.email}</p>
       <p className='font-medium'>Phone:</p>
       
       {

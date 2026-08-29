@@ -5,7 +5,7 @@ export const authAdmin =(req,res,next)=>{
         const {atoken} = req.headers
         
         if(!atoken){
-            res.json({success : false , message : "Not Authorized login again 3"})
+            res.json({success : false , message : "Not Authorized login again "})
         }
          
         const token_decode = jwt.verify( atoken , process.env.JWT_SECRET_KEY)
