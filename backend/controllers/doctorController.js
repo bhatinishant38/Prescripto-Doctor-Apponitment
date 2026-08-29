@@ -20,7 +20,7 @@ export const changeAvailablity = async (req, res)=>{
 
 export const fetchAllDoctors = async (req,res)=>{
      try {
-        const allDoctors = await doctorModel.find({}).select('-password')
+        const allDoctors = await doctorModel.find({}).select(['-password' ,'-email'])
         res.json({success: true , allDoctors})     
      } catch (error) {
         res.json({success :false ,message: error.message})
