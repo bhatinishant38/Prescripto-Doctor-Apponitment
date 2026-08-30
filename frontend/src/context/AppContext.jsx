@@ -71,6 +71,7 @@ export const AppContextProvider = ({ children }) => {
     backendUrl,
     userData,
     setUserData,
+    getUserProfileData
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

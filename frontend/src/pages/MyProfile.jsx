@@ -3,13 +3,48 @@ import React, { useState } from 'react'
 import { useContext } from 'react'
 import { AppContext } from '../context/AppContext'
 import { assets } from '../assets/assets'
+import { toast } from 'react-toastify'
+import axios from "axios";
+
 
 const MyProfile = () => {
 
-const {userData ,setUserData }= useContext(AppContext)
+const {userData ,setUserData ,token ,backendUrl ,getUserProfileData }= useContext(AppContext)
 console.log(userData)
   const [isEdit , setIsEdit]  = useState(false)
   const [image ,setImage] = useState()
+
+  const updateUserData = async () => {
+    try {
+     
+      const formData = new FormData()
+      formData.append("name",userData.name)
+      formData.append('phone',userData.phone)
+      formData.append('dob' ,userData.dob)
+      formData.append('address',JSON.stringify(userData.address))
+      formData.append('gender',userData.gender)
+     
+
+      image && formData.append("image",image)
+
+      const {data} = await axios.post(backendUrl+"/api/user/update-profile",formData,{headers:{token}})
+      
+      console.log(data)
+      if(data.success){
+        toast.success(data.message)
+        await getUserProfileData()
+        setImage(false)
+        setIsEdit()
+      }   else{
+        toast.error(data.message)
+      }
+   
+    } catch (error) {
+      console.log(error)
+      toast.error(error.message)
+     
+    }
+  }
 
   return userData && (
     <div className='max-w-lg flex flex-col gap-2 text-sm'>
@@ -89,7 +124,7 @@ console.log(userData)
       <div className='mt-10'>
         {
           isEdit 
-          ? <button className='border border-primary px-8 py-2 rounded-full hover:bg-primary hover:text-white transition-all' onClick={()=>setIsEdit(false)}>Save Information</button>
+          ? <button className='border border-primary px-8 py-2 rounded-full hover:bg-primary hover:text-white transition-all' onClick={updateUserData}>Save Information</button>
           : <button className='border border-primary px-8 py-2 rounded-full hover:bg-primary hover:text-white transition-all' onClick={()=>setIsEdit(true)}>Edit</button>
         }
       </div>
