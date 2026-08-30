@@ -1,27 +1,33 @@
 import React, { useState } from 'react'
+
+import { useContext } from 'react'
+import { AppContext } from '../context/AppContext'
 import { assets } from '../assets/assets'
 
 const MyProfile = () => {
 
-  const [userData , setUserData] = useState({
-    name : "Edward Vincent",
-    image : assets.profile_pic,
-    email : "testExample@gmail.com",
-    phone : "+1 123-456-7890",
-    address : {
-      line1 : "57th Cress , Richmond",
-      line2 : "Circle, Church Road ,London"
-    },
-    gender : 'Male',
-    dob : "14-01-2005"
-  })
-
+const {userData ,setUserData }= useContext(AppContext)
+console.log(userData)
   const [isEdit , setIsEdit]  = useState(false)
+  const [image ,setImage] = useState()
 
-  return (
+  return userData && (
     <div className='max-w-lg flex flex-col gap-2 text-sm'>
+      {
+        isEdit 
+        ? <div>
+          <label htmlFor="image">
+            <div className='inline-block relative cursor-pointer'>
+              <img className='w-40 h-40 rounded-4xl opacity-75' src={image ? URL.createObjectURL(image) : userData.image} alt="" />
+              <img className='w-10 absolute bottom-13 right-16' src={image ? '' : assets.upload_icon} alt="" />
+            </div>
+            <input onChange={(e)=>setImage(e.target.files[0])} type="file" id='image' hidden />
+          </label>
+        </div>
+        : <img className='w-42 h-42 rounded-4xl' src={userData.image} alt="" />
+      }
       
-      <img className='w-36 rounded' src={userData.image} alt="" />
+      
       {
         isEdit 
         ? <input className='bg-gray-50 text-3xl font-medium max-w-60 mt-4' type="text" value={userData.name} onChange={(e)=> setUserData(prev => ({...prev ,name: e.target.value}))} />
