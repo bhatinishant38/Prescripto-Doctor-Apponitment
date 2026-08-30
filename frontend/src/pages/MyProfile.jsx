@@ -40,7 +40,7 @@ const MyProfile = () => {
         ? <input className='bg-gray-100 max-w-52' type="text" value={userData.phone} onChange={(e)=> setUserData(prev => ({...prev ,phone: e.target.value}))} />
         : <p className='text-blue-400'>{userData.phone}</p>
       }
-      <p className='font-medium'>Adress:</p>
+      <p className='font-medium'>Address:</p>
       {
         isEdit 
         ? <p>

@@ -2,6 +2,9 @@ import validator from "validator";
 import bcrypt from "bcrypt";
 import { userModel } from "../models/userModel.js";
 import jwt from "jsonwebtoken";
+import { v2 as cloudinary } from "cloudinary";
+
+
 // API for user sign up
 
 export const registerUser = async (req, res) => {
@@ -65,7 +68,7 @@ export const loginUser = async (req, res) => {
   }
 };
 
-// API for fetching userdata
+// API for fetching user profile data
 
 export const getUserdata = async (req, res) => {
   const { userId } = req.body;
@@ -80,3 +83,24 @@ export const getUserdata = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
+// API for updating user data
+
+export const updatingUserdata = async ()=>{
+  try {
+    const { userId , name ,phone , gender ,dob ,address } = req.body
+    const imageFile = req.file
+    if(!name || !phone || gender || !dob || !address ){
+      res.json({success:false ,message : "Data missing"})
+    }
+    await userModel.findByIdAndUpdate(userId ,{name ,phone,gender ,dob ,address:JSON.parse(address)})
+    if(imageFile){
+      const imageFile = cloudinary.uploader.upload(imageFile.path ,{resource_type:image} )
+      const imageUrl = (await imageFile).secure_url
+      await userModel.findByIdAndUpdate(userId ,{image:imageUrl})
+    }  
+  } catch (error) {
+     console.log(error);
+    res.json({ success: false, message: error.message });   
+  }
+}
