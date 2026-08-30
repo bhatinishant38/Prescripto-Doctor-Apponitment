@@ -4,7 +4,6 @@ import { userModel } from "../models/userModel.js";
 import jwt from "jsonwebtoken";
 import { v2 as cloudinary } from "cloudinary";
 
-
 // API for user sign up
 
 export const registerUser = async (req, res) => {
@@ -71,7 +70,7 @@ export const loginUser = async (req, res) => {
 // API for fetching user profile data
 
 export const getUserdata = async (req, res) => {
-  const { userId } = req.body;
+  const userId = req.userId;
   try {
     const userData = await userModel.findById(userId);
     if (!userData) {
@@ -86,21 +85,34 @@ export const getUserdata = async (req, res) => {
 
 // API for updating user data
 
-export const updatingUserdata = async ()=>{
+export const updatingUserdata = async (req, res) => {
   try {
-    const { userId , name ,phone , gender ,dob ,address } = req.body
-    const imageFile = req.file
-    if(!name || !phone || gender || !dob || !address ){
-      res.json({success:false ,message : "Data missing"})
+    const userId = req.userId;
+    const { name, phone, gender, dob, address } = req.body;
+    const imageFile = req.file;
+    console.log(imageFile);
+    console.log(userId, name, phone, gender, dob, address);
+    if (!name || !phone || !gender || !dob || !address) {
+      res.json({ success: false, message: "Data missing" });
     }
-    await userModel.findByIdAndUpdate(userId ,{name ,phone,gender ,dob ,address:JSON.parse(address)})
-    if(imageFile){
-      const imageFile = cloudinary.uploader.upload(imageFile.path ,{resource_type:image} )
-      const imageUrl = (await imageFile).secure_url
-      await userModel.findByIdAndUpdate(userId ,{image:imageUrl})
-    }  
+    await userModel.findByIdAndUpdate(userId, {
+      name,
+      phone,
+      gender,
+      dob,
+      address: JSON.parse(address),
+    });
+    if (imageFile) {
+      const imageUpload = await cloudinary.uploader.upload(imageFile.path, {
+        resource_type: "image",
+      });
+      const imageUrl = imageUpload.secure_url;
+      console.log(imageUrl);
+      await userModel.findByIdAndUpdate(userId, { image: imageUrl });
+    }
+    res.json({ success: true, message: "Profile Updated" });
   } catch (error) {
-     console.log(error);
-    res.json({ success: false, message: error.message });   
+    console.log(error);
+    res.json({ success: false, message: error.message });
   }
-}
+};
