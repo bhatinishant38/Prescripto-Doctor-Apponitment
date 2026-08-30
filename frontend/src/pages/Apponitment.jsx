@@ -33,7 +33,7 @@ const Apponitment = () => {
       currentDate.setDate(today.getDate() + i )
       console.log("next",currentDate)
 
-      // setting and time of the date with index
+      // setting end time of the date with index
       let endTime = new Date()
       endTime.setDate(today.getDate() + i)
       endTime.setHours(21,0,0,0)
