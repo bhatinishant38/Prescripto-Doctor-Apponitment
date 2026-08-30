@@ -53,13 +53,13 @@ console.log(userData)
         ? <div>
           <label htmlFor="image">
             <div className='inline-block relative cursor-pointer'>
-              <img className='w-40 h-40 rounded-4xl opacity-75' src={image ? URL.createObjectURL(image) : userData.image} alt="" />
+              <img className='w-40 h-40 rounded-full opacity-75' src={image ? URL.createObjectURL(image) : userData.image} alt="" />
               <img className='w-10 absolute bottom-13 right-16' src={image ? '' : assets.upload_icon} alt="" />
             </div>
             <input onChange={(e)=>setImage(e.target.files[0])} type="file" id='image' hidden />
           </label>
         </div>
-        : <img className='w-42 h-42 rounded-4xl' src={userData.image} alt="" />
+        : <img className='w-42 h-42 rounded-full' src={userData.image} alt="" />
       }
       
       
