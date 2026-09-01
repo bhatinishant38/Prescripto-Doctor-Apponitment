@@ -178,8 +178,6 @@ export const getAppointmentlist = async (req,res)=>{
    try {
     const userId = req.userId
     const appointmentList = await appointmentModel.find({userId})
-
-    
     res.json({success : true ,appointmentList})  
    } catch (error) {
     console.log(error)
