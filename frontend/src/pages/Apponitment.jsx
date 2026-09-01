@@ -24,6 +24,10 @@ const Apponitment = () => {
   };
 
   const getAvailableSlots = async () => {
+
+    if(!docInfo){
+      return;
+    }
     setDocSlots([]);
     //getting current date
     let today = new Date();
@@ -37,9 +41,9 @@ const Apponitment = () => {
     for (let i = startingIndex; i < startingIndex + 7; i++) {
       // getting date index
       let currentDate = new Date(today);
-      console.log("today", currentDate);
+      
       currentDate.setDate(today.getDate() + i);
-      console.log("next", currentDate);
+      
 
       // setting end time of the date with index
       let endTime = new Date();
@@ -56,7 +60,7 @@ const Apponitment = () => {
         currentDate.setHours(10);
         currentDate.setMinutes(0);
       }
-
+     
       let timeSlots = [];
       while (currentDate < endTime) {
         let formattedTime = currentDate.toLocaleTimeString([], {
@@ -71,14 +75,9 @@ const Apponitment = () => {
 
         const slotDate = day + "_" + month + "_" + year;
         const slotTime = formattedTime;
-        console.log(slotDate,slotTime)
-
-        console.log(docInfo)
-        
-        
+ 
         const isSlotAvailable = docInfo.slots_booked[slotDate] && docInfo.slots_booked[slotDate].includes(slotTime)  ? false : true;
-        console.log(isSlotAvailable)
-
+       
         if (isSlotAvailable) {
           // add slot to array
           timeSlots.push({
