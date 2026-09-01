@@ -19,7 +19,6 @@ export const AppContextProvider = ({ children }) => {
     try {
       const { data } = await axios.get(backendUrl + "/api/doctor/list");
       if (data.success) {
-        console.log(data.allDoctors)
         setDoctors(data.allDoctors);
       } else {
         toast.error(data.message);

@@ -122,7 +122,7 @@ export const updatingUserdata = async (req, res) => {
 
 export const bookAppointment = async (req,res)=>{
 
-  const {userId} = req.userId
+  const userId = req.userId
   const {docId ,slotDate, slotTime} = req.body
 
   const docData = await doctorModel.findById(docId).select('-password')
@@ -146,6 +146,7 @@ export const bookAppointment = async (req,res)=>{
 
   const userData = await userModel.findById(userId).select('-password')
 
+  // delteing slots_booked data from docdata because we not send want to store booking data in user apponitment data
   delete docData.slots_booked
 
   const appointmentData = {
@@ -169,3 +170,6 @@ export const bookAppointment = async (req,res)=>{
    res.json({success : true ,message : "Appointment Booked"})
 
 }
+
+
+// Api to get Appointments
