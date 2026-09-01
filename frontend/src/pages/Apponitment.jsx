@@ -49,6 +49,8 @@ const Apponitment = () => {
       let endTime = new Date();
       endTime.setDate(today.getDate() + i);
       endTime.setHours(21, 0, 0, 0);
+     
+   
 
       // setting hours
       if (today.getDate() === currentDate.getDate() && startingIndex === 0) {
@@ -85,6 +87,7 @@ const Apponitment = () => {
             time: formattedTime,
           });
         }
+       
 
         // Increment current time by 30 minutes
         currentDate.setMinutes(currentDate.getMinutes() + 30);
