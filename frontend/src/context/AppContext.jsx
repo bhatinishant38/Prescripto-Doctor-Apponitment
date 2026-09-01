@@ -19,7 +19,7 @@ export const AppContextProvider = ({ children }) => {
     try {
       const { data } = await axios.get(backendUrl + "/api/doctor/list");
       if (data.success) {
-        console.log(data.allDoctors);
+        console.log(data.allDoctors)
         setDoctors(data.allDoctors);
       } else {
         toast.error(data.message);
@@ -35,7 +35,7 @@ export const AppContextProvider = ({ children }) => {
       const { data } = await axios.get(backendUrl + "/api/user/get-profile", {
         headers: { token },
       });
-      console.log(data);
+      
       if (data.success) {
         setUserData(data.userData);
       } else {
@@ -71,7 +71,8 @@ export const AppContextProvider = ({ children }) => {
     backendUrl,
     userData,
     setUserData,
-    getUserProfileData
+    getUserProfileData,
+    fetchAllDoctors
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
