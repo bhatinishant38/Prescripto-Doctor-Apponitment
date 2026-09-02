@@ -201,6 +201,7 @@ export const cancelAppointment = async (req,res)=>{
       return res.json({success:false ,message : "Unauthorized action"})
     }
 
+    // releasing doctor slots
     const {docId ,slotDate ,slotTime} = appointmentData
 
     const docData = await doctorModel.findById(docId)
@@ -210,7 +211,7 @@ export const cancelAppointment = async (req,res)=>{
     slots_booked[slotDate] = slots_booked[slotDate].filter(e=> e!== slotTime)
 
    await doctorModel.findByIdAndUpdate(docId ,{slots_booked})
-   res.json({success : true ,message : "Appointment canceled"})
+   res.json({success : true ,message : "Appointment Cancelled"})
     
   } catch (error) {
     console.log(error)
