@@ -6,7 +6,6 @@
   "author": "",
   "type": "module",
   "main": "server.js",
-  
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"
@@ -21,6 +20,7 @@
     "mongoose": "^9.9.3",
     "multer": "^2.2.0",
     "nodemon": "^3.1.14",
+    "razorpay": "^2.9.8",
     "validator": "^13.15.35"
   }
 }
