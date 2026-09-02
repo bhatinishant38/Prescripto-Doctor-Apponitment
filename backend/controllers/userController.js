@@ -200,6 +200,8 @@ export const cancelAppointment = async (req,res)=>{
     if(appointmentData.userId !== userId){
       return res.json({success:false ,message : "Unauthorized action"})
     }
+    await appointmentModel.findByIdAndUpdate(appointmentId,{cancelled : true})
+
 
     // releasing doctor slots
     const {docId ,slotDate ,slotTime} = appointmentData
