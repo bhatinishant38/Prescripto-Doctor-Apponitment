@@ -11,5 +11,5 @@ adminRouter.post('/add-doctors',authAdmin ,upload.single('image') , addDoctor)
 adminRouter.post('/login' , adminLogin)
 adminRouter.post('/all-doctors',authAdmin ,getAllDoctors)
 adminRouter.post('/change-availablity',authAdmin ,changeAvailablity)
-adminRouter.get('/all-appointments' ,authAdmin ,getAllAppointments)
+adminRouter.get('/get-appointments' ,authAdmin ,getAllAppointments)
 
