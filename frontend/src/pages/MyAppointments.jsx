@@ -52,14 +52,14 @@ const MyAppointments = () => {
       currency : order.currency ,
       name : "Appointment Payment",
       description : "Appointment Payment",
-      order_id : order_id ,
+      order_id : order.id ,
       receipt : order.receipt ,
       handler : async (response)=>{
-        
+        console.log(response)
       }
-
-    }
-    
+    } 
+    const rzp = new window.Razorpay(options)
+    rzp.open()
   }
   
   const appointmentRazorpay = async (appointmentId)=>{
