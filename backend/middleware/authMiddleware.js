@@ -8,7 +8,7 @@ export const authAdmin =(req,res,next)=>{
         }     
         const token_decode = jwt.verify( atoken , process.env.JWT_SECRET_KEY)
         if(token_decode !== process.env.ADMIN_EMAIL + process.env.ADMIN_PASSWORD){
-              res.json({success : false , message : "Not Authorized login again and again"})
+              res.json({success : false , message : "Not Authorized login again "})
         }
         next()     
     } catch (error) {

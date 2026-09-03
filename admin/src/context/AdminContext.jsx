@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import { toast } from "react-toastify";
 import axios from 'axios'
+import { useEffect } from "react";
 
 export const AdminContext = createContext();
 
@@ -39,8 +40,10 @@ export const AdminContextProvider = ({ children }) => {
   }
   const getAllAppointments = async ()=>{
     try {
-      const {data} = await axios.get(backendUrl+"/api/admin/get-appointments")
+      const {data} = await axios.get(backendUrl+"/api/admin/get-appointments",{headers:{aToken}})
+      console.log("papa")
       if(data.success){
+        console.log(data)
         setAppointments(data.allAppointments)
       }else{
         toast.error(data.message)
@@ -50,6 +53,13 @@ export const AdminContextProvider = ({ children }) => {
       toast.error(error.message)   
     }
   }
+  useEffect(()=>{
+    if(aToken){
+      getAllAppointments()
+
+    }
+    
+  },[aToken])
 
 
   const value = {
