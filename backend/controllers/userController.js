@@ -230,3 +230,30 @@ const razorpayInstance = new razorpay({
 })
 
 // API to make payment of appointments using Razropay
+
+export const paymentRazorpay = async ( req,res)=>{
+
+  try {
+      const {appointmentId} = req.body
+      const appointmentData = await appointmentModel.findById(appointmentId)
+     // checking if appointment exists or get cancelled    
+      if(!appointmentData || appointmentData.cancelled){
+        res.json({success :false ,message :"Apppointment Cancelled or Not found"})
+      }
+      // creating options for razorpay amount
+      const options = {
+        amount : appointmentData.amount * 100,
+        currency : process.env.CURRENCY,
+        receipt : appointmentId
+      }
+      // creation of an order
+      const order = await razorpayInstance.orders.create(options)
+      res.json({success : true , order})
+    
+  } catch (error) {
+     console.log(error)
+     res.json({success: false, message:error.message})     
+  }
+
+
+}
