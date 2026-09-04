@@ -10,7 +10,7 @@ export const AdminContextProvider = ({ children }) => {
   const [aToken, setAToken] = useState(localStorage.getItem("aToken")? localStorage.getItem("aToken"):"");
   const [allDoctors ,setAllDoctors] = useState([])
   const [appointments ,setAppointments] = useState([])
-  const [dashData ,setDashData] = useState([])
+  const [dashData ,setDashData] = useState(false)
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
   
   const getAllDoctors = async ()=>{
@@ -75,7 +75,7 @@ export const AdminContextProvider = ({ children }) => {
       const {data} = await axios.get(backendUrl+'/api/admin/dashboard' ,{headers:{aToken}})
       if(data.success){
         setDashData(data.dashData)
-        console.log(data.dashData)
+        console.log('dashData',data.dashData)
       }else{
         toast.error(data.message)
         
