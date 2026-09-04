@@ -1,10 +1,12 @@
 import React from 'react'
 import { useContext } from 'react'
 import { AdminContext } from '../../context/AdminContext'
+import { AppContext } from '../../context/AppContext'
 
 const AllApointments = () => {
 
   const {aToken , appointments , getAllAppointments} = useContext(AdminContext)
+  const { calculateAge } = useContext(AppContext)
 
   useContext(()=>{
     if(aToken){
@@ -27,8 +29,13 @@ const AllApointments = () => {
         </div>
 
         {appointments.map((item,index)=>(
-          <div key={index}>
-            {index+1}
+          <div key={index} className='flex flex-wrap justify-between max_sm:gap-2 sm:grid-cols-[0.5fr_3fr-1fr_3fr_3fr_1fr_1fr] items-center text-gray-500 py-3 px-6 hover:bg-gray-50'>
+            <p className='max-sm:hidden'>{index+1}</p>
+            <div className='flex items-center gap-2'>
+              <img  className='w-8 h-8 rounded-full' src={item.userData.image} alt="" />
+              <p>{item.userData.name}</p>
+            </div>
+            <p className='max-sm:hidden'>{calculateAge(item.userData.dob)}</p>
           </div>
         ))}
 
