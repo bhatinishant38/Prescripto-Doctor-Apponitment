@@ -7,6 +7,7 @@ const Dashboard = () => {
 
   useEffect(()=>{
     if(aToken){
+      getDashData()
 
     }
 
