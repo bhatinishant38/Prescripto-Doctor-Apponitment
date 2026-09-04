@@ -61,6 +61,7 @@ export const AdminContextProvider = ({ children }) => {
       const {data} = await axios.post(backendUrl+'/api/admin/cancel-appointments',{appointmentId},{headers:{aToken}})
       if(data.success){
         toast.success(data.message)
+        getDashData()
       }else{
         toast.error(data.message)
       }  
