@@ -128,6 +128,8 @@ export const getAllDoctors = async (req,res)=>{
 
 }
 
+
+// API to get All Appointments from database
 export const getAllAppointments = async (req,res)=>{
   try { 
     const allAppointments = await appointmentModel.find({})
@@ -135,6 +137,29 @@ export const getAllAppointments = async (req,res)=>{
   } catch (error) {
      console.log(error)
      res.json({success : false , message: error.message})    
+  }
+}
+
+
+// API for appointment cancellation
+
+export const cancelAppointment = async (req,res) =>{
+  try {
+    const {appointmentId} = req.body 
+    const appointmentData = await appointmentModel.findById(appointmentId)
+    await appointmentModel.findByIdAndUpdate(appointmentId,{cancelled: true})
+    const { docId, slotDate, slotTime } = appointmentData;
+    const docData = await doctorModel.findById(docId);
+    let slots_booked = docData.slots_booked;
+    slots_booked[slotDate] = slots_booked[slotDate].filter(
+      (e) => e !== slotTime,
+    );
+    await doctorModel.findByIdAndUpdate(docId, { slots_booked });
+    res.json({ success: true, message: "Appointment Cancelled" });
+    
+  } catch (error) {
+     console.log(error)
+     res.json({success : false , message: error.message})     
   }
 }
 
