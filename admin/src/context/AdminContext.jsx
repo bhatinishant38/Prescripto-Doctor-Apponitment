@@ -37,6 +37,7 @@ export const AdminContextProvider = ({ children }) => {
     } catch (error) {
        toast.error(error.message)  
     }
+    
   }
   const getAllAppointments = async ()=>{
     try {
