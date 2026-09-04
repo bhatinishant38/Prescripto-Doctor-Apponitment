@@ -37,7 +37,7 @@ export const AdminContextProvider = ({ children }) => {
     } catch (error) {
        toast.error(error.message)  
     }
-    
+
   }
   const getAllAppointments = async ()=>{
     try {
@@ -54,6 +54,21 @@ export const AdminContextProvider = ({ children }) => {
       toast.error(error.message)   
     }
   }
+
+  const cancelAppointment = async (appointmentId) =>{
+    try {
+      const {data} = await axios.post(backendUrl+'/api/admin/cancel-appointments',{appointmentId},{headers:{aToken}})
+      if(data.success){
+        toast.success(data.message)
+      }else{
+        toast.error(data.message)
+      }  
+    } catch (error) {
+      console.log(error)
+      toast.error(error.message)     
+    }
+  }
+
   useEffect(()=>{
     if(aToken){
       getAllAppointments()
@@ -72,7 +87,8 @@ export const AdminContextProvider = ({ children }) => {
     changeAvailability,
     appointments,
     setAppointments,
-    getAllAppointments
+    getAllAppointments,
+    cancelAppointment
   };
 
   return (

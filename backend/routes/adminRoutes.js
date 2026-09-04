@@ -12,5 +12,5 @@ adminRouter.post('/login' , adminLogin)
 adminRouter.post('/all-doctors',authAdmin ,getAllDoctors)
 adminRouter.post('/change-availablity',authAdmin ,changeAvailablity)
 adminRouter.get('/get-appointments' ,authAdmin ,getAllAppointments)
-adminRouter.post('cancel-appointments',authAdmin ,cancelAppointment)
+adminRouter.post('/cancel-appointments',authAdmin ,cancelAppointment)
 
