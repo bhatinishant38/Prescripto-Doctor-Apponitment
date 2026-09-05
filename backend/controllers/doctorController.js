@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 import { doctorModel } from "../models/doctorModel.js"
+import { appointmentModel } from '../models/appointmentModel.js'
 
 // API for changing doctor's Availability
 
@@ -58,10 +59,12 @@ export const doctorLogin = async (req,res)=>{
 
 export const getDoctorAppointments = async (req,res)=>{
     try {
-        const doctorId = req.doctorId
-        if(doctorId){
-        const doctorData = await doctorModel.findById(doctorId)
-           res.json({success : true , doctorData})
+        const docId = req.docId
+        console.log(docId)
+        if(docId){
+           const appointments = await appointmentModel.find({docId})
+           console.log(appointments)
+           res.json({success : true , appointments})
         }  else{
             res.json({success: false ,message : "Not Authorized login again"})
         }       
