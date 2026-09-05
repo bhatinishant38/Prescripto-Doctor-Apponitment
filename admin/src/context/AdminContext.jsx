@@ -43,7 +43,7 @@ export const AdminContextProvider = ({ children }) => {
   const getAllAppointments = async ()=>{
     try {
       const {data} = await axios.get(backendUrl+"/api/admin/get-appointments",{headers:{aToken}})
-      console.log("papa")
+      
       if(data.success){
         console.log(data)
         setAppointments(data.allAppointments)
@@ -90,7 +90,6 @@ export const AdminContextProvider = ({ children }) => {
   useEffect(()=>{
     if(aToken){
       getAllAppointments()
-
     }
     
   },[aToken])
