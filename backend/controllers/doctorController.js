@@ -52,5 +52,21 @@ export const doctorLogin = async (req,res)=>{
          res.json({success :false ,message: error.message})
         
     }
+}
 
+// API to get all appointment of a single doctor in doctor panel
+
+export const getDoctorAppointments = async (req,res)=>{
+    try {
+        const doctorId = req.doctorId
+        if(doctorId){
+        const doctorData = await doctorModel.findById(doctorId)
+           res.json({success : true , doctorData})
+        }  else{
+            res.json({success: false ,message : "Not Authorized login again"})
+        }       
+    } catch (error) {
+       console.log(error)
+       res.json({success :false ,message: error.message})     
+    }
 }
