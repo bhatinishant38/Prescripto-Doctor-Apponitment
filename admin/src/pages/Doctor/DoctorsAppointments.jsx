@@ -32,7 +32,7 @@ const DoctorsAppointments = () => {
         </div>
 
         {
-          appointments.map((item,index)=>(
+          appointments.reverse().map((item,index)=>(
             <div key={index} className='flex flex-wrap justify-between max-sm:gap-5 max-sm:text-base sm:grid grid-cols-[0.5fr_2fr_1fr_1fr_3fr_1fr_1fr] gap-1 items-center text-gray-500 py-3 px-6 border-b border-gray-200 hover:bg-gray-50'>
                 <p className='max-sm:hidden'>{index+1}</p>
                 <div className='flex items-center gap-2'>
@@ -40,7 +40,7 @@ const DoctorsAppointments = () => {
                   <p>{item.userData.name}</p>
                 </div>
                 <div>
-                  <p className='text-xs inline border border-primary px-2 rounded-full'>{item.payment ? "Online" : "Cash"}</p>   
+                  <p className='text-xs inline border-2 border-gray-400 px-2 rounded-full'>{item.payment ? "Online" : "Cash"}</p>   
                 </div>
                 <p className='max-sm:hidden'>{calculateAge(item.userData.dob)}</p>
                 <p>{slotDateFormat(item.slotDate)}, {item.slotTime} </p>

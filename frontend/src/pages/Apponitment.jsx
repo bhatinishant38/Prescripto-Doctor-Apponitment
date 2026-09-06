@@ -44,7 +44,6 @@ const Apponitment = () => {
       
       currentDate.setDate(today.getDate() + i);
       
-
       // setting end time of the date with index
       let endTime = new Date();
       endTime.setDate(today.getDate() + i);
@@ -72,7 +71,6 @@ const Apponitment = () => {
         const month = currentDate.getMonth() + 1;
         const year = currentDate.getFullYear();
         
-
         const slotDate = day + "_" + month + "_" + year;
         const slotTime = formattedTime;
  
@@ -86,7 +84,6 @@ const Apponitment = () => {
           });
         }
        
-
         // Increment current time by 30 minutes
         currentDate.setMinutes(currentDate.getMinutes() + 30);
       }

@@ -47,8 +47,9 @@ const MyAppointments = () => {
 
   const initPay = (order) =>{
     const options = {
+      
       key : import.meta.env.VITE_RAZORPAY_KEY_ID,
-      amount : order.amount,
+      amount : order.amount ,
       currency : order.currency ,
       name : "Appointment Payment",
       description : "Appointment Payment",
@@ -76,7 +77,7 @@ const MyAppointments = () => {
   const appointmentRazorpay = async (appointmentId)=>{
     try {
       const {data} = await axios.post(backendUrl+'/api/user/payment-razorpay',{appointmentId},{headers:{token}})
-      if(data.success){
+      if(data.success){        
         initPay(data.order)       
       }   
     } catch (error) {
