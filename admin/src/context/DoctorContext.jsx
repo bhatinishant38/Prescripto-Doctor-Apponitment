@@ -10,6 +10,7 @@ export const DoctorContextProvider = ({ children }) => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL
   const [dToken ,setDToken] = useState(localStorage.getItem('dToken')?localStorage.getItem('dToken'):'')
   const [ appointments ,setAppointments] = useState([])
+  const [ dashboardData ,setDashboardData] = useState([])
 
   const getAppointments =  async ()=>{
     try {
@@ -46,11 +47,25 @@ export const DoctorContextProvider = ({ children }) => {
       const {data} = await axios.post(backendUrl+'/api/doctor/cancel-appointment',{appointmentId},{headers:{dToken}})
       if(data.success){
         toast.success(data.message)
-        
+
         getAppointments()
       }else{
         toast.error(data.message)
       }   
+    } catch (error) {
+      console.log(error)
+      toast.error(error.message)
+    }
+  }
+
+  const getDashboardData = async ()=>{
+    try {
+      const {data} = await axios.get(backendUrl+"/api/doctor/dashboard",{headers:{dToken}})
+      if(data.success){
+        setDashboardData(data.dashboardData)
+      }else{
+        toast.error(data.message)
+      }    
     } catch (error) {
       console.log(error)
       toast.error(error.message)
@@ -66,7 +81,10 @@ export const DoctorContextProvider = ({ children }) => {
     setAppointments,
     getAppointments,
     completeAppointment,
-    cancelAppointment
+    cancelAppointment,
+    dashboardData,
+    setDashboardData,
+    getDashboardData
   };
   
   return (
