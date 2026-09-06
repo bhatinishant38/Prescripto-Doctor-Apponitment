@@ -73,3 +73,43 @@ export const getDoctorAppointments = async (req,res)=>{
        res.json({success :false ,message: error.message})     
     }
 }
+
+// API to mark appointment completed for doctor panel
+
+export const appointmentComplete  = async(req,res)=>{
+    try {
+        const docId = req.docId
+        const {appointmentId} = req.body
+        const appointmentData = await appointmentModel.findById(appointmentId)
+        if(appointmentData && appointmentData.docId === docId){
+            await appointmentModel.findByIdAndUpdate(appointmentId , {isCompleted :true})
+            return res.json({success: true ,message :"Appointment Completed"})
+        } else{
+            return res.json({success: false ,message : "Mark Failed"})
+        }
+        
+    } catch (error) {
+       console.log(error)
+       res.json({success :false ,message: error.message})
+    }
+}
+
+// API to camcel appointmentfor doctor panel
+
+export const appointmentCancel  = async(req,res)=>{
+    try {
+        const docId = req.docId
+        const {appointmentId} = req.body
+        const appointmentData = await appointmentModel.findById(appointmentId)
+        if(appointmentData && appointmentData.docId === docId){
+            await appointmentModel.findByIdAndUpdate(appointmentId , {cancelled :true})
+            return res.json({success: true ,message :"Appointment Canceled"})
+        } else{
+            return res.json({success: false ,message : "Cancellation Failed"})
+        }
+        
+    } catch (error) {
+       console.log(error)
+       res.json({success :false ,message: error.message})
+    }
+}
