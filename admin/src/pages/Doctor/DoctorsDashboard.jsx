@@ -5,16 +5,18 @@ import { useEffect } from 'react'
 
 const DoctorsDashboard = () => {
 
-  const {dToken,dashboardData,getDashboardData} = useContext(DoctorContext)
-  useEffect(()=>{
+  const {dToken,dashboardData,setDashboardData,getDashboardData} = useContext(DoctorContext)
 
+  useEffect(()=>{
     if(dToken){
       getDashboardData()
-      console.log(dashboardData)
+
     }
   },[dToken])
-  return (
-    <div>DoctorsDashboard</div>
+  return dashboardData && (
+    <div>
+
+      DoctorsDashboard</div>
   )
 }
 

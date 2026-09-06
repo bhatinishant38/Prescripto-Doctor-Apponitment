@@ -10,7 +10,7 @@ export const DoctorContextProvider = ({ children }) => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL
   const [dToken ,setDToken] = useState(localStorage.getItem('dToken')?localStorage.getItem('dToken'):'')
   const [ appointments ,setAppointments] = useState([])
-  const [ dashboardData ,setDashboardData] = useState([])
+  const [ dashboardData ,setDashboardData] = useState(false)
 
   const getAppointments =  async ()=>{
     try {
@@ -63,6 +63,7 @@ export const DoctorContextProvider = ({ children }) => {
       const {data} = await axios.get(backendUrl+"/api/doctor/dashboard",{headers:{dToken}})
       if(data.success){
         setDashboardData(data.dashboardData)
+        console.log(data.dashboardData)
       }else{
         toast.error(data.message)
       }    
