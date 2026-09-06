@@ -46,7 +46,7 @@ export const AdminContextProvider = ({ children }) => {
       
       if(data.success){
         console.log(data)
-        setAppointments(data.allAppointments)
+        setAppointments(data.allAppointments.reverse())
       }else{
         toast.error(data.message)
       }
@@ -62,6 +62,7 @@ export const AdminContextProvider = ({ children }) => {
       if(data.success){
         toast.success(data.message)
         getDashData()
+        getAllAppointments()
       }else{
         toast.error(data.message)
       }  

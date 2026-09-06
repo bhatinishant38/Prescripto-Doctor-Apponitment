@@ -92,6 +92,7 @@ export const updatingUserdata = async (req, res) => {
   try {
     const userId = req.userId;
     const { name, phone, gender, dob, address } = req.body;
+    console.log(name ,phone,gender,dob,address)
     const imageFile = req.file;
     if (!name || !phone || !gender || !dob || !address) {
       res.json({ success: false, message: "Data missing" });
