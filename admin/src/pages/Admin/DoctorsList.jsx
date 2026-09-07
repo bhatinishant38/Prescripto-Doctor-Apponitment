@@ -3,9 +3,11 @@ import { useContext } from 'react'
 import { AdminContext } from '../../context/AdminContext'
 import { useEffect } from 'react'
 
+
 const DoctorsList = () => {
 
   const {aToken ,allDoctors,getAllDoctors ,changeAvailability} = useContext(AdminContext)
+ 
 
   useEffect(()=>{
     if (aToken) {
