@@ -117,6 +117,7 @@ export const DoctorContextProvider = ({ children }) => {
     setDashboardData,
     getDashboardData,
     doctorProfileData,
+    setDoctorProfileData,
     getDoctorProfileData
     
   };
