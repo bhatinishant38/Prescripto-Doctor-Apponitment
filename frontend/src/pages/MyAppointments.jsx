@@ -98,7 +98,6 @@ const MyAppointments = () => {
   },[appointments])
 
 
-
   return appointments && (
     <div >
       <p className='pb-3 mt-12 font-medium text-zinc-700 border-b' >My appointments</p>
@@ -118,9 +117,10 @@ const MyAppointments = () => {
             </div>
             <div></div>
             <div className='flex flex-col gap-2 justify-end'>
-              {!item.cancelled && item.payment && <button className='text-sm sm:min-w-48 py-2 border rounded-3xl bg-blue-100 text-stone-500 text-center '>Paid</button>}
-               { !item.cancelled && !item.payment &&  <button onClick={()=>appointmentRazorpay(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded-3xl bg-blue-100 hover:bg-primary hover:text-white transition-all duration-300'>Pay Online</button>}  
-                { !item.cancelled && <button onClick={()=>cancelAppointment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded-3xl hover:bg-red-600 hover:text-white transition-all duration-300'>Cancel appointment</button>} 
+              { item.isCompleted && !item.cancelled && <button className='text-sm text-green-500 text-center sm:min-w-48 py-2 border rounded-3xl hover:bg-green-600 hover:text-white transition-all duration-300'>Completed</button>}
+              {!item.cancelled && item.payment &&  !item.isCompleted && <button className='text-sm sm:min-w-48 py-2 border rounded-3xl bg-blue-100 text-stone-500 text-center '>Paid</button>}
+               { !item.cancelled && !item.isCompleted && !item.payment &&  <button onClick={()=>appointmentRazorpay(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded-3xl bg-blue-100 hover:bg-primary hover:text-white transition-all duration-300'>Pay Online</button>}  
+                { !item.cancelled && !item.isCompleted && <button onClick={()=>cancelAppointment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded-3xl hover:bg-red-600 hover:text-white transition-all duration-300'>Cancel appointment</button>} 
                 {item.cancelled && <button  className='sm:min-w-48 py-2 border border-red-500 rounded-red-500 rounded-3xl text-red-500'>Appointment Cancelled</button>}
             </div>
           </div>

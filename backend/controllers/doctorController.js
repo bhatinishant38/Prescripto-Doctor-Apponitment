@@ -145,3 +145,33 @@ export const doctorDashboard = async ( req,res)=>{
     }
 
 }
+
+// API for get profile doctor profile data 
+
+export const getDoctorProfile = async (req,res)=>{
+    try {
+        const docId = req.docId
+        const doctorData = await doctorModel.findById(docId)
+        res.json({success: true ,doctorData})   
+    } catch (error) {
+        console.log(error)
+       res.json({success :false ,message: error.message})      
+    }
+}
+
+// API for updating doctor profile data
+
+export const updateDoctorProfile = async (req,res)=>{
+    try {
+        
+        const docId = req.docId
+        const {address,fees,available} = req.body
+        await doctorModel.findByIdAndUpdate(docId,{address,fees,available})
+        res.json({success: true,message: "Profile Updated"})
+        
+    } catch (error) {
+        console.log(error)
+        res.json({success :false ,message: error.message}) 
+        
+    }
+}
