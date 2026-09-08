@@ -12,7 +12,7 @@ export const DoctorContextProvider = ({ children }) => {
   );
   const [appointments, setAppointments] = useState([]);
   const [dashboardData, setDashboardData] = useState(false);
-  const [doctorProfileData,setDoctorProfileData] = useState(false)
+  const [doctorProfileData, setDoctorProfileData] = useState(false);
 
   const getAppointments = async () => {
     try {
@@ -21,13 +21,13 @@ export const DoctorContextProvider = ({ children }) => {
         { headers: { dToken } },
       );
       if (data.success) {
-        console.log(data.appointments);
+        // console.log(data.appointments);
         setAppointments(data.appointments);
       } else {
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error(error.message);
     }
   };
@@ -47,7 +47,7 @@ export const DoctorContextProvider = ({ children }) => {
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error(error.message);
     }
   };
@@ -67,7 +67,7 @@ export const DoctorContextProvider = ({ children }) => {
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error(error.message);
     }
   };
@@ -79,30 +79,32 @@ export const DoctorContextProvider = ({ children }) => {
       });
       if (data.success) {
         setDashboardData(data.dashboardData);
-        console.log(data.dashboardData);
+        // console.log(data.dashboardData);
       } else {
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error(error.message);
     }
   };
 
-  const getDoctorProfileData=  async ()=>{
+  const getDoctorProfileData = async () => {
     try {
-      const {data} = await axios.get(backendUrl+'/api/doctor/profile',{headers:{dToken}})
-      if(data.success){
-        setDoctorProfileData(data.doctorProfileData)
-        console.log(data.doctorProfileData)
-      }else{
-        toast.error(error.message)
-      }   
+      const { data } = await axios.get(backendUrl + "/api/doctor/profile", {
+        headers: { dToken },
+      });
+      if (data.success) {
+        setDoctorProfileData(data.doctorProfileData);
+        // console.log(data.doctorProfileData)
+      } else {
+        toast.error(error.message);
+      }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error(error.message);
     }
-  }
+  };
 
   const value = {
     dToken,
@@ -118,8 +120,7 @@ export const DoctorContextProvider = ({ children }) => {
     getDashboardData,
     doctorProfileData,
     setDoctorProfileData,
-    getDoctorProfileData
-    
+    getDoctorProfileData,
   };
 
   return (

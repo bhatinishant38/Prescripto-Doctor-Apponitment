@@ -43,33 +43,33 @@ const AddDoctors = () => {
       );
 
       formData.forEach((value, key) => {
-        console.log(`${key} : ${value}`);
+        // console.log(`${key} : ${value}`);
       });
-      console.log(formData);
+      // console.log(formData);
 
       const { data } = await axios.post(
         backendUrl + "/api/admin/add-doctors",
         formData,
         { headers: { aToken } },
       );
-      console.log(data);
+      // console.log(data);
       if (data.success) {
         toast.success(data.message);
-        setDocImg(false)
-        setEmail('')
-        setName('')
-        setPassword('')
-        setAddress1('')
-        setAddress2('')
-        setAbout('')
-        setDegree('')
-        setSpeciality('')
+        setDocImg(false);
+        setEmail("");
+        setName("");
+        setPassword("");
+        setAddress1("");
+        setAddress2("");
+        setAbout("");
+        setDegree("");
+        setSpeciality("");
       } else {
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error)
-      toast.error(data.message)
+      // console.log(error)
+      toast.error(data.message);
     }
   };
 

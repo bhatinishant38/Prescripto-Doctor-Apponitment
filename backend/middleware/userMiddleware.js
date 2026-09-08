@@ -10,15 +10,13 @@ export const authUser = async (req, res, next) => {
     }
     const decode_token = jwt.verify(token, process.env.JWT_SECRET_KEY);
     req.userId = decode_token.id;
-    console.log("Authenticated userId:", req.userId);
+    // console.log("Authenticated userId:", req.userId);
     next();
   } catch (error) {
-    console.log(error);
-    return res
-      .status(401)
-      .json({
-        success: false,
-        message: "Invalid or expired token. Please log in again.",
-      });
+    // console.log(error);
+    return res.status(401).json({
+      success: false,
+      message: "Invalid or expired token. Please log in again.",
+    });
   }
 };

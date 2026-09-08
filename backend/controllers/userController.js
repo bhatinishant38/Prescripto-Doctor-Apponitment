@@ -39,7 +39,7 @@ export const registerUser = async (req, res) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY);
     res.json({ success: true, token });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.json({ success: false, message: error.message });
   }
 };
@@ -65,7 +65,7 @@ export const loginUser = async (req, res) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY);
     return res.json({ success: true, token });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.json({ success: false, message: error.message });
   }
 };
@@ -81,7 +81,7 @@ export const getUserdata = async (req, res) => {
     }
     return res.json({ success: true, userData });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.json({ success: false, message: error.message });
   }
 };
@@ -92,7 +92,7 @@ export const updatingUserdata = async (req, res) => {
   try {
     const userId = req.userId;
     const { name, phone, gender, dob, address } = req.body;
-    console.log(name, phone, gender, dob, address);
+    // console.log(name, phone, gender, dob, address);
     const imageFile = req.file;
     if (!name || !phone || !gender || !dob || !address) {
       res.json({ success: false, message: "Data missing" });
@@ -109,12 +109,12 @@ export const updatingUserdata = async (req, res) => {
         resource_type: "image",
       });
       const imageUrl = imageUpload.secure_url;
-      console.log(imageUrl);
+      // console.log(imageUrl);
       await userModel.findByIdAndUpdate(userId, { image: imageUrl });
     }
     res.json({ success: true, message: "Profile Updated" });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.json({ success: false, message: error.message });
   }
 };
@@ -177,7 +177,7 @@ export const getAppointmentlist = async (req, res) => {
     const appointmentList = await appointmentModel.find({ userId });
     res.json({ success: true, appointmentList });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.json({ success: false, message: error.message });
   }
 };
@@ -213,7 +213,7 @@ export const cancelAppointment = async (req, res) => {
     await doctorModel.findByIdAndUpdate(docId, { slots_booked });
     res.json({ success: true, message: "Appointment Cancelled" });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.json({ success: false, message: error.message });
   }
 };
@@ -248,7 +248,7 @@ export const paymentRazorpay = async (req, res) => {
     const order = await razorpayInstance.orders.create(options);
     res.json({ success: true, order });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.json({ success: false, message: error.message });
   }
 };
@@ -258,9 +258,9 @@ export const paymentRazorpay = async (req, res) => {
 export const verifyRazorpay = async (req, res) => {
   try {
     const { razorpay_order_id } = req.body;
-    console.log(razorpay_order_id);
+    // console.log(razorpay_order_id);
     const orderInfo = await razorpayInstance.orders.fetch(razorpay_order_id);
-    console.log(orderInfo);
+    // console.log(orderInfo);
     if (orderInfo.status === "paid") {
       await appointmentModel.findByIdAndUpdate(orderInfo.receipt, {
         payment: true,
@@ -270,7 +270,7 @@ export const verifyRazorpay = async (req, res) => {
       res.json({ success: false, message: "Payment Failed" });
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.json({ success: false, message: error.message });
   }
 };

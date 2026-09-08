@@ -10,10 +10,10 @@ export const authDoctor = async (req, res, next) => {
     }
     const decode_token = jwt.verify(dtoken, process.env.JWT_SECRET_KEY);
     req.docId = decode_token.id;
-    console.log("Authenticated doctorId:", req.docId);
+    // console.log("Authenticated doctorId:", req.docId);
     next();
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.json({ success: false, message: error.message });
   }
 };

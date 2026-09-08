@@ -24,7 +24,7 @@ export const AppContextProvider = ({ children }) => {
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error(error.message);
     }
   };
@@ -46,7 +46,7 @@ export const AppContextProvider = ({ children }) => {
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       if (error.response?.status === 401) {
         localStorage.removeItem("token");
         setToken(false);
@@ -69,7 +69,7 @@ export const AppContextProvider = ({ children }) => {
   }, [token]);
 
   useEffect(() => {
-    console.log("Updated userData:", userData);
+    // console.log("Updated userData:", userData);
   }, [userData]);
 
   const value = {

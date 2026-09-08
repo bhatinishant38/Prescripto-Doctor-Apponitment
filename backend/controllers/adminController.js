@@ -2,13 +2,12 @@ import validator from "validator";
 import bcrypt from "bcrypt";
 import { v2 as cloudinary } from "cloudinary";
 import { doctorModel } from "../models/doctorModel.js";
-import jwt from 'jsonwebtoken'
+import jwt from "jsonwebtoken";
 import { appointmentModel } from "../models/appointmentModel.js";
 import { userModel } from "../models/userModel.js";
 
 // Api for adding Doctor
 export const addDoctor = async (req, res) => {
-  
   try {
     const {
       name,
@@ -22,8 +21,8 @@ export const addDoctor = async (req, res) => {
       fees,
     } = req.body;
     const imageFile = req.file;
-   
-    console.log("file", imageFile);
+
+    // console.log("file", imageFile);
 
     // checkin if all data to add doctor
     if (
@@ -91,67 +90,57 @@ export const addDoctor = async (req, res) => {
   }
 };
 
-
 // Api for admin login
 
-export const adminLogin = (req, res)=>{
-
+export const adminLogin = (req, res) => {
   try {
-     const { email ,password} = req.body
-    if(email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD){
-      const token = jwt.sign(email+password , process.env.JWT_SECRET_KEY)
-      res.json({success : true , token})
-    } else{
-       res.json({success : false , message: "Invalid Credantials"})
+    const { email, password } = req.body;
+    if (
+      email === process.env.ADMIN_EMAIL &&
+      password === process.env.ADMIN_PASSWORD
+    ) {
+      const token = jwt.sign(email + password, process.env.JWT_SECRET_KEY);
+      res.json({ success: true, token });
+    } else {
+      res.json({ success: false, message: "Invalid Credantials" });
     }
-
   } catch (error) {
-    console.log(error)
-     res.json({success : false , message: error.message})
+    // console.log(error)
+    res.json({ success: false, message: error.message });
   }
-
-}
-
+};
 
 //Api for get all doctors from Database
 
-export const getAllDoctors = async (req,res)=>{
-
+export const getAllDoctors = async (req, res) => {
   try {
-      const allDoctors = await doctorModel.find({}).select('-password')
-      res.json({success: true ,allDoctors})
-    
+    const allDoctors = await doctorModel.find({}).select("-password");
+    res.json({ success: true, allDoctors });
   } catch (error) {
-     console.log(error)
-     res.json({success : false , message: error.message})
-    
+    // console.log(error)
+    res.json({ success: false, message: error.message });
   }
-
-}
-
+};
 
 // API to get All Appointments from database
-export const getAllAppointments = async (req,res)=>{
-  try { 
-    const allAppointments = await appointmentModel.find({})
-    res.json({success : true , allAppointments})   
+export const getAllAppointments = async (req, res) => {
+  try {
+    const allAppointments = await appointmentModel.find({});
+    res.json({ success: true, allAppointments });
   } catch (error) {
-     console.log(error)
-     res.json({success : false , message: error.message})    
+    // console.log(error)
+    res.json({ success: false, message: error.message });
   }
-}
-
+};
 
 // API for appointment cancellation
 
 export const cancelAppointment = async (req, res) => {
   try {
-   
     const { appointmentId } = req.body;
 
     const appointmentData = await appointmentModel.findById(appointmentId);
 
-  
     await appointmentModel.findByIdAndUpdate(appointmentId, {
       cancelled: true,
     });
@@ -170,29 +159,28 @@ export const cancelAppointment = async (req, res) => {
     await doctorModel.findByIdAndUpdate(docId, { slots_booked });
     res.json({ success: true, message: "Appointment Cancelled" });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.json({ success: false, message: error.message });
   }
 };
 
-
 // Api to get dashboard data for admin panel
 
-export const adminDashboard = async (req,res)=>{
+export const adminDashboard = async (req, res) => {
   try {
-    const doctors = await doctorModel.find({})
-    const users = await userModel.find({})
-    const appointments = await appointmentModel.find({})
+    const doctors = await doctorModel.find({});
+    const users = await userModel.find({});
+    const appointments = await appointmentModel.find({});
 
     const dashData = {
-      doctors : doctors.length,
+      doctors: doctors.length,
       appointments: appointments.length,
-      patients : users.length,
-      latestAppointments: appointments.reverse().slice(0,5)
-    }
-    res.json({success : true ,dashData})
+      patients: users.length,
+      latestAppointments: appointments.reverse().slice(0, 5),
+    };
+    res.json({ success: true, dashData });
   } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: error.message });    
+    // console.log(error);
+    res.json({ success: false, message: error.message });
   }
-}
+};

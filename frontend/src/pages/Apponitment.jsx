@@ -24,8 +24,7 @@ const Apponitment = () => {
   };
 
   const getAvailableSlots = async () => {
-
-    if(!docInfo){
+    if (!docInfo) {
       return;
     }
     setDocSlots([]);
@@ -41,14 +40,14 @@ const Apponitment = () => {
     for (let i = startingIndex; i < startingIndex + 7; i++) {
       // getting date index
       let currentDate = new Date(today);
-      
+
       currentDate.setDate(today.getDate() + i);
-      
+
       // setting end time of the date with index
       let endTime = new Date();
       endTime.setDate(today.getDate() + i);
       endTime.setHours(21, 0, 0, 0);
-     
+
       // setting hours
       if (today.getDate() === currentDate.getDate() && startingIndex === 0) {
         currentDate.setHours(
@@ -59,7 +58,7 @@ const Apponitment = () => {
         currentDate.setHours(10);
         currentDate.setMinutes(0);
       }
-     
+
       let timeSlots = [];
       while (currentDate < endTime) {
         let formattedTime = currentDate.toLocaleTimeString([], {
@@ -67,15 +66,19 @@ const Apponitment = () => {
           minute: "2-digit",
         });
 
-        const day = currentDate.getDate();    
+        const day = currentDate.getDate();
         const month = currentDate.getMonth() + 1;
         const year = currentDate.getFullYear();
-        
+
         const slotDate = day + "_" + month + "_" + year;
         const slotTime = formattedTime;
- 
-        const isSlotAvailable = docInfo.slots_booked[slotDate] && docInfo.slots_booked[slotDate].includes(slotTime)  ? false : true;
-       
+
+        const isSlotAvailable =
+          docInfo.slots_booked[slotDate] &&
+          docInfo.slots_booked[slotDate].includes(slotTime)
+            ? false
+            : true;
+
         if (isSlotAvailable) {
           // add slot to array
           timeSlots.push({
@@ -83,7 +86,7 @@ const Apponitment = () => {
             time: formattedTime,
           });
         }
-       
+
         // Increment current time by 30 minutes
         currentDate.setMinutes(currentDate.getMinutes() + 30);
       }
@@ -119,13 +122,13 @@ const Apponitment = () => {
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error(error.message);
     }
   };
 
   useEffect(() => {
-    console.log(docSlots);
+    // console.log(docSlots);
   }, [docSlots]);
 
   useEffect(() => {

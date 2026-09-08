@@ -6,33 +6,41 @@ import { AppContext } from "../../context/AppContext";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-
 const DoctorsProfile = () => {
-  const { dToken, getDoctorProfileData, doctorProfileData ,setDoctorProfileData,backendUrl} =
-    useContext(DoctorContext);
+  const {
+    dToken,
+    getDoctorProfileData,
+    doctorProfileData,
+    setDoctorProfileData,
+    backendUrl,
+  } = useContext(DoctorContext);
   const { currency } = useContext(AppContext);
   const [isEdit, setIsEdit] = useState(false);
 
-  const updateProfile = async ()=>{
+  const updateProfile = async () => {
     try {
-      const updateData ={
-        address : doctorProfileData.address,
-        fees : doctorProfileData.fees ,
-        available : doctorProfileData.available
+      const updateData = {
+        address: doctorProfileData.address,
+        fees: doctorProfileData.fees,
+        available: doctorProfileData.available,
+      };
+      const { data } = await axios.post(
+        backendUrl + "/api/doctor/update-profile",
+        updateData,
+        { headers: { dToken } },
+      );
+      if (data.success) {
+        toast.success(data.message);
+        setIsEdit(false);
+      } else {
+        toast.error(data.message);
       }
-      const {data} = await axios.post(backendUrl+'/api/doctor/update-profile',updateData ,{headers:{dToken}})
-      if(data.success){
-        toast.success(data.message)
-        setIsEdit(false)
-      }else{
-        toast.error(data.message)
-      }     
     } catch (error) {
-      console.log(error)
-      toast.error(data.message)  
-      getDoctorProfileData()
+      // console.log(error)
+      toast.error(data.message);
+      getDoctorProfileData();
     }
-  }
+  };
 
   useEffect(() => {
     if (dToken) {
@@ -76,22 +84,68 @@ const DoctorsProfile = () => {
             <p className="text-gray-600 font-medium mt-4">
               Appointment fee :{" "}
               <span className="text-gray-800">
-                {currency} {isEdit ? <input onChange={(e)=>setDoctorProfileData((prev)=>({...prev,fees: e.target.value}))} value={doctorProfileData.fees} type="number" />:doctorProfileData.fees}
+                {currency}{" "}
+                {isEdit ? (
+                  <input
+                    onChange={(e) =>
+                      setDoctorProfileData((prev) => ({
+                        ...prev,
+                        fees: e.target.value,
+                      }))
+                    }
+                    value={doctorProfileData.fees}
+                    type="number"
+                  />
+                ) : (
+                  doctorProfileData.fees
+                )}
               </span>
             </p>
 
             <div className="flex gap-2 py-2  ">
               <p>Address :</p>
               <p className="text-sm p-0.5">
-                {isEdit ? <input onChange={(e)=>setDoctorProfileData(prev=> ({...prev, address: {...prev.address ,line1 : e.target.value}}))} type="text" value={doctorProfileData.address.line1}/>:doctorProfileData.address.line1}
+                {isEdit ? (
+                  <input
+                    onChange={(e) =>
+                      setDoctorProfileData((prev) => ({
+                        ...prev,
+                        address: { ...prev.address, line1: e.target.value },
+                      }))
+                    }
+                    type="text"
+                    value={doctorProfileData.address.line1}
+                  />
+                ) : (
+                  doctorProfileData.address.line1
+                )}
                 <br />
-                {isEdit ? <input onChange={(e)=>setDoctorProfileData(prev=> ({...prev, address: {...prev.address ,line2 : e.target.value}}))} type="text" value={doctorProfileData.address.line2}/>:doctorProfileData.address.line2}
+                {isEdit ? (
+                  <input
+                    onChange={(e) =>
+                      setDoctorProfileData((prev) => ({
+                        ...prev,
+                        address: { ...prev.address, line2: e.target.value },
+                      }))
+                    }
+                    type="text"
+                    value={doctorProfileData.address.line2}
+                  />
+                ) : (
+                  doctorProfileData.address.line2
+                )}
               </p>
             </div>
 
             <div className="flex gap-1 pt-2">
               <input
-                onChange={(e)=>isEdit && setDoctorProfileData(prev=> ({...prev,available: !prev.available}))}
+                onChange={(e) =>
+                  isEdit &&
+                  setDoctorProfileData((prev) => ({
+                    ...prev,
+                    available: !prev.available,
+                  }))
+                }
                 checked={doctorProfileData.available}
                 type="checkbox"
                 name=""
