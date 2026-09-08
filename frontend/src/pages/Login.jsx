@@ -11,9 +11,9 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const { token, setToken, backendUrl } = useContext(AppContext);
+  const { token, setToken, backendUrl, userData } = useContext(AppContext);
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
@@ -28,9 +28,8 @@ const Login = () => {
         if (data.success) {
           localStorage.setItem("token", data.token);
           setToken(data.token);
-          
-          toast.success('Registered Successfully')
-          
+
+          toast.success("Registered Successfully");
         } else {
           toast.error(data.message);
         }
@@ -42,9 +41,8 @@ const Login = () => {
         if (data.success) {
           localStorage.setItem("token", data.token);
           setToken(data.token);
-          
-          
-          toast.success('Login Successfully')
+
+          toast.success("Login Successfully");
         } else {
           toast.error(data.message);
         }
@@ -55,12 +53,11 @@ const Login = () => {
     }
   };
 
-  useEffect(()=>{
-    if(token){
-      navigate('/')
+  useEffect(() => {
+    if (token && userData) {
+      navigate("/");
     }
-
-  },[token])
+  }, [token, userData, navigate]);
 
   return (
     <form onSubmit={onSubmitHandler} className="min-h-[80vh] flex items-center">

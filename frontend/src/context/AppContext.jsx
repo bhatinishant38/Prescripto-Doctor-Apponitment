@@ -34,14 +34,24 @@ export const AppContextProvider = ({ children }) => {
       const { data } = await axios.get(backendUrl + "/api/user/get-profile", {
         headers: { token },
       });
-      
+
       if (data.success) {
         setUserData(data.userData);
       } else {
+        if (data.message?.includes("token")) {
+          localStorage.removeItem("token");
+          setToken(false);
+          setUserData(false);
+        }
         toast.error(data.message);
       }
     } catch (error) {
       console.log(error);
+      if (error.response?.status === 401) {
+        localStorage.removeItem("token");
+        setToken(false);
+        setUserData(false);
+      }
       toast.error(error.message);
     }
   };
@@ -71,7 +81,7 @@ export const AppContextProvider = ({ children }) => {
     userData,
     setUserData,
     getUserProfileData,
-    fetchAllDoctors
+    fetchAllDoctors,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
