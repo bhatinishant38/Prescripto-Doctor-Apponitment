@@ -17,10 +17,10 @@ export const connectCloudinary = (async function () {
       },
     )
     .catch((error) => {
-      // console.log(error);
+      console.log(error);
     });
 
-  // console.log(uploadResult);
+  console.log(uploadResult);
 
   // Optimize delivery by resizing and applying auto-format and auto-quality
   const optimizeUrl = cloudinary.url("shoes", {
@@ -28,7 +28,7 @@ export const connectCloudinary = (async function () {
     quality: "auto",
   });
 
-  // console.log(optimizeUrl);
+  console.log(optimizeUrl);
 
   // Transform the image: auto-crop to square aspect_ratio
   const autoCropUrl = cloudinary.url("shoes", {
@@ -38,5 +38,5 @@ export const connectCloudinary = (async function () {
     height: 500,
   });
 
-  // console.log(autoCropUrl);
+  console.log(autoCropUrl);
 })();
