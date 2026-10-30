@@ -6,13 +6,15 @@ import { AppContext } from "../context/AppContext";
 const welcomeMessage = {
   role: "assistant",
   content:
-    "Hi! I can help you find a suitable doctor or guide you through booking an appointment. I can't diagnose or replace a medical professional.",
+    "Hi! I can help you find a doctor, book or manage appointments, pay online, or update your profile. I can't diagnose or replace a medical professional.",
 };
 
 const quickPrompts = [
-  "How can i cancel my appointment",
   "How do I book an appointment?",
-  "How can i do online payment"
+  "How can I cancel my appointment?",
+  "How do I pay for an appointment online?",
+  "How can I edit my profile?",
+  "Where can I check my appointments?",
 ];
 
 const Chatbot = () => {
@@ -95,7 +97,7 @@ const Chatbot = () => {
             <div>
               <h2 className="font-medium">Prescripto assistant</h2>
               <p className="text-xs text-white/80">
-                Doctor suggestions and booking help
+                Doctor, appointment, and account help
               </p>
             </div>
             <button
@@ -113,9 +115,9 @@ const Chatbot = () => {
             className="flex-1 space-y-3 overflow-y-auto bg-slate-50 p-4"
           >
             <p className="rounded-lg border border-amber-200 bg-amber-50 p-2 text-xs leading-relaxed text-amber-900">
-              Not for emergencies or diagnosis. Messages are sent to Google Gemini to
-              generate guidance; avoid sharing your name or other identifying
-              details.
+              Not for emergencies or diagnosis. Messages are sent to Google
+              Gemini to generate guidance; avoid sharing your name or other
+              identifying details.
             </p>
             {messages.map((message, index) => {
               const suggestedDoctors =
