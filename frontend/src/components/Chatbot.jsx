@@ -10,8 +10,9 @@ const welcomeMessage = {
 };
 
 const quickPrompts = [
-  "Help me choose a doctor",
+  "How can i cancel my appointment",
   "How do I book an appointment?",
+  "How can i do online payment"
 ];
 
 const Chatbot = () => {
