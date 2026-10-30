@@ -162,7 +162,7 @@ const MyProfile = () => {
                 <option value="Female">Female</option>
               </select>
             ) : (
-              <p className="text-gray-400">{userData.name}</p>
+              <p className="text-gray-400">{userData.gender}</p>
             )}
             <p className="font-medium">Bithday:</p>
             {isEdit ? (
