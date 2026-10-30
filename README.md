@@ -75,6 +75,10 @@ RAZORPAY_KEY_ID=your_razorpay_key_id
 RAZORPAY_KEY_SECRET=your_razorpay_key_secret
 CURRENCY=INR
 DOLLAR_PRICE=90
+
+# Required for the patient-facing Gemini doctor and booking assistant
+GEMINI_API_KEY=your_gemini_api_key
+GEMINI_MODEL=gemini-3.6-flash
 ```
 
 Create `.env` files for both Vite applications. The backend URL should include the backend port:
@@ -143,6 +147,7 @@ The applications are available at:
 - `/api/user` - registration, login, profiles, appointments, and payments
 - `/api/admin` - admin authentication, doctor management, dashboard, and appointments
 - `/api/doctor` - doctor authentication, profile, dashboard, availability, and appointments
+- `/api/ai` - Gemini-powered patient chat for doctor-specialty suggestions and booking guidance
 
 ## Useful Commands
 
@@ -158,6 +163,7 @@ npm start        # Start the backend with nodemon
 ## Notes
 
 - The backend connects to the `prescripto` database name beneath the configured MongoDB URI.
+- The patient chat requires `GEMINI_API_KEY` in the backend environment. Chat messages are sent to Google's Gemini API; the assistant is not a diagnostic service and should not be used for emergencies.
 - Doctor images are uploaded through Cloudinary.
 - Appointment payment verification is handled through Razorpay.
 - The backend does not currently include an automated test suite.
