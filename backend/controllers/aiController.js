@@ -50,7 +50,7 @@ export const chatWithAssistant = async (req, res) => {
     });
   }
 
-  const model = process.env.GEMINI_MODEL || "gemini-3.6-flash";
+  const model = process.env.GEMINI_MODEL || "gemini-3.5-flash-lite";
   let response;
   try {
     response = await fetch(
@@ -71,7 +71,7 @@ export const chatWithAssistant = async (req, res) => {
           })),
           generationConfig: {
             responseMimeType: "application/json",
-            maxOutputTokens: 500,
+            maxOutputTokens: 300,
             temperature: 0.3,
           },
         }),
