@@ -75,14 +75,17 @@ export const chatWithAssistant = async (req, res) => {
             temperature: 0.3,
           },
         }),
-        signal: AbortSignal.timeout(20000),
+        signal: AbortSignal.timeout(30000),
       },
     );
   } catch (error) {
     console.error("Gemini chat request failed:", error.message);
-    return res.status(502).json({
+    const timedOut = error.name === "TimeoutError";
+    return res.status(timedOut ? 504 : 502).json({
       success: false,
-      message: "The assistant is temporarily unavailable. Please try again.",
+      message: timedOut
+        ? "Gemini took too long to respond. Please try again."
+        : "Could not connect to Gemini. Check the backend's network connection and try again.",
     });
   }
 
